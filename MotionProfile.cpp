@@ -1,4 +1,5 @@
 #include "MotionProfile.h"
+#include "math.h"
 
 MotionProfile::MotionProfile(float startPosition,
     float endPosition, 
@@ -8,17 +9,76 @@ MotionProfile::MotionProfile(float startPosition,
     
     // check if cruise phase exists
     // time to reach maxVel
-    float maxVelTime = maxVel / maxAcc;
+    maxVelTime = maxVel / maxAcc;
     // distance covered by acc phase
-    float accDist = 0.5 * maxAcc * maxVelTime * maxVelTime;
+    accDist = 0.5 * maxAcc * pow(maxVelTime, 2);
     // minDistance is combo of acceleration and deceleration phase
-    float minDistance = accDist * 2;
+    distance = endPosition - startPosition;
 
-    if (distance > minDistance) {
+    if (distance > accDist * 2) {
         hasCruise = true;
     }
+
+    if (hasCruise) {
+        float cruiseDistance = distance - (accDist * 2);
+        cruiseTime = cruiseDistance / maxVel;
+        vPeak = maxVel;
+    }
+    else {
+        maxVelTime = sqrt(distance / maxAcc); // from solve for t (acceleration time when reaching maxVel might not happen): 2 * (accDist) = 1/2 * maxAcc t^2 
+        cruiseTime = 0.0;
+        vPeak = maxAcc * maxVelTime;
+        accDist = 0.5 * maxAcc * maxVelTime * maxVelTime;
+    }
+    totalTime = maxVelTime * 2 + cruiseTime;
 }
 
-int* MotionProfile::tCurve1D(float time) {
+MotionState MotionProfile::tCurve1D(float time) {
+
+    /*
+    base equations:
+    a = a_i
+    v = a t + v_i
+    x = 1/2 a t^2 + v_i t + x_i
+    */
+
+    if (time < 0) {
+        currAcc = 0;
+        currVel = 0;
+        currPos = 0;
+    }
+
+    else if (time < maxVelTime) {
+        currAcc = maxAcc;
+        currVel = currAcc * time;
+        currPos = 0.5 * currAcc * pow(time, 2);
+    }
+
+    else if (time < maxVelTime + cruiseTime) {
+        
+        currAcc = 0;
+        currVel = vPeak;
+        currPos = vPeak * (time - maxVelTime) + accDist;
+    }
+
+    else if (time < totalTime) {
+        float deccTime = time - (cruiseTime + maxVelTime);
+
+        currAcc = -maxAcc;
+        currVel = currAcc * deccTime + vPeak;
+        currPos = 0.5 * currAcc * pow(deccTime, 2) + vPeak * deccTime + (accDist + vPeak * cruiseTime);
+    }
+    
+    else {
+        currAcc = 0;
+        currVel = 0;
+        currPos = distance;
+    }
+
+    MotionState motionState;
+    motionState.acc = currAcc;
+    motionState.vel = currVel;
+    motionState.pos = currPos;
+    return motionState;
     
 }
