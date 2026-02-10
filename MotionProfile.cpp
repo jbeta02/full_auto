@@ -58,11 +58,11 @@ MotionState MotionProfile::tCurve1D(float time) {
         
         currAcc = 0;
         currVel = vPeak;
-        currPos = vPeak * (time - maxVelTime) + accDist;
+        currPos = vPeak * (time - maxVelTime) + accDist; // normalize time so time: 0 starts at this section
     }
 
     else if (time < totalTime) {
-        float deccTime = time - (cruiseTime + maxVelTime);
+        float deccTime = time - (cruiseTime + maxVelTime); // normalize time so time: 0 starts at this section
 
         currAcc = -maxAcc;
         currVel = currAcc * deccTime + vPeak;
