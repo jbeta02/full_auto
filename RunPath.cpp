@@ -9,12 +9,16 @@ int main() {
     Node a = {0, 0, 0, 0, false, nullptr};
     pathPlanning.grid.generateGrid(&a, 0);
 
-    Node start = {0, 0, 0, 0, false, nullptr};
-    Node end  = {0, 0, 2, 2, false, nullptr};
+    Node* start = &pathPlanning.grid.values[0][0];
+    Node* end  = &pathPlanning.grid.values[2][2];
     Node* nodePath[pathPlanning.listSize];
-    int size = pathPlanning.aStar(&start, &end, nodePath);
+    int size = pathPlanning.aStar(start, end, nodePath);
 
-     cout << size;
+    for (int i=0; i < size; i++) {
+        cout << nodePath[i]->x << ", " << nodePath[i]->y << "\n";
+    }
+
+    cout << size;
 
     return 0;
 }

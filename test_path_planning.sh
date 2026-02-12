@@ -1,5 +1,5 @@
 #!/bin/bash
 
-g++ .\\RunPath.cpp .\\PathPlanning.cpp .\\Grid.cpp -o RunPath.exe
+g++ -g .\\RunPath.cpp .\\PathPlanning.cpp .\\Grid.cpp -o RunPath.exe
 
 ./RunPath

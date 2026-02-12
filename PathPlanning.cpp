@@ -4,9 +4,6 @@ Grid PathPlanning::grid;
 
 int PathPlanning::aStar(Node* start, Node* end, Node* nodePath[]) {
 
-    grid.values[start->x][start->y] = start;
-    grid.values[end->x][end->y] = end;
-
     addOpen(start); // add start to open
     while (openCount > 0) { 
         int lowestIndex = openLowestCost();
@@ -19,10 +16,14 @@ int PathPlanning::aStar(Node* start, Node* end, Node* nodePath[]) {
             return retracePath(start, end, nodePath);
         }
 
-        Node* nei[4];
+        Node* nei[4]; // front, back, left, right
         grid.getNeighbours(current, nei);
 
         for (Node* neighbour: nei) {
+            if (neighbour == 0) { // check for nullptr
+                continue;
+            }
+
             if (neighbour->isWall || inClosed(neighbour)){
                 continue;
             }
@@ -37,7 +38,7 @@ int PathPlanning::aStar(Node* start, Node* end, Node* nodePath[]) {
             if (!inOpen(neighbour)) {
                 addOpen(neighbour);
             }
-        }
+    }
     }
 }
 

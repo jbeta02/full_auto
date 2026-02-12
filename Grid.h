@@ -18,7 +18,7 @@ class Grid {
 
         void generateGrid(Node* blockers, int blockerSize); // generate grid with blockers
 
-        Node* values[sizeX][sizeY]; // store grid nodes
+        Node values[sizeX][sizeY]; // store grid nodes
 
         void getNeighbours(Node* node, Node* nei[4]); // nei[4]: front, back, left, right
 
