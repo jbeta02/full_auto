@@ -78,7 +78,7 @@ MotionState MotionProfile::tCurve1D(float time) {
     MotionState motionState;
     motionState.acc = currAcc;
     motionState.vel = currVel;
-    motionState.pos = currPos;
+    motionState.pos = startPosition + currPos;
     return motionState;
     
 }
