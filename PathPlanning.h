@@ -9,6 +9,8 @@ class PathPlanning {
         static Grid grid;
         static constexpr int listSize = grid.sizeX * grid.sizeY;
 
+        void print_open_closed();
+
     private:
         int pathSize = 0;
         int openCount = 0;
@@ -23,7 +25,7 @@ class PathPlanning {
         void addclosed(Node* node);
 
         void removeOpen(Node* node);
-        void removeclosed(Node* node);
+        void removeClosed(Node* node);
 
         bool inOpen(Node* node);
         bool inClosed(Node* node);

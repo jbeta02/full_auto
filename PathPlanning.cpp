@@ -1,4 +1,6 @@
 # include "PathPlanning.h"
+#include <iostream>
+using namespace std;
 
 Grid PathPlanning::grid;
 
@@ -38,7 +40,7 @@ int PathPlanning::aStar(Node* start, Node* end, Node* nodePath[]) {
             if (!inOpen(neighbour)) {
                 addOpen(neighbour);
             }
-    }
+        }
     }
 }
 
@@ -50,10 +52,22 @@ void PathPlanning::addclosed(Node* node) {
     closed[closedCount++] = node;
 }
 void PathPlanning::removeOpen(Node* node) {
-    open[--openCount] = node;
+    for (int i=0; i < openCount; i++) {
+        if (open[i] == node) {
+            open[i] = nullptr;
+        }
+    }
+    // openCount--;
 }
-void PathPlanning::removeclosed(Node* node) {
-    closed[--closedCount] = node;
+void PathPlanning::removeClosed(Node* node) {
+        for (int i=0; i < closedCount; i++) {
+        if (closed[i] == 0) continue;
+
+        if (closed[i] == node) {
+            closed[i] = nullptr;
+        }
+    }
+    // closedCount--;
 }
 
 bool PathPlanning::inOpen(Node* node) {
@@ -77,6 +91,7 @@ int PathPlanning::openLowestCost() {
     int lowestFCost = 10000;
     int lowestIndex = 0;
     for (int i=0; i < openCount; i++) {
+        if (open[i] == 0) continue;
         int f_cost = open[i]->g_cost + open[i]->h_cost;
         if (f_cost < lowestFCost || lowestFCost == f_cost && open[i]->h_cost < open[lowestIndex]->h_cost) {
             lowestFCost = f_cost;
@@ -109,5 +124,24 @@ void PathPlanning::reversePath(Node* nodePath[], int len) {
         nodePath[j] = temp;
         i++;
         j--;
+    }
+}
+
+void PathPlanning::print_open_closed() {
+    cout << "closed \n";
+    for (int i=0; i < closedCount; i++) {
+        cout << closed[i]->x << ", " << closed[i]->y << "\n";
+        if (closed[i+1] == 0) {
+            break;
+        }
+    }
+
+    cout << "open \n";
+    for (int i=0; i < openCount; i++) {
+        if (open[i] == 0) continue;
+        cout << open[i]->x << ", " << open[i]->y << "\n";
+        if (open[i+1] == 0) {
+            break;
+        }
     }
 }

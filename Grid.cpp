@@ -1,7 +1,7 @@
 # include "Grid.h"
 # include <math.h>
 
-void Grid::generateGrid(Node* blockers, int blockerSize) {
+void Grid::generateGrid(Node* blockers[], int blockerSize) {
 
     for (int i=0; i < sizeX; i++) {
         for (int j=0; j < sizeY; j++) {
@@ -11,7 +11,7 @@ void Grid::generateGrid(Node* blockers, int blockerSize) {
     }
 
     for (int i=0; i < blockerSize; i++) {
-        values[blockers[i].x][blockers[i].y] = blockers[i];
+        values[blockers[i]->x][blockers[i]->y] = *blockers[i];
     }
 }
 

@@ -13,10 +13,10 @@ struct Node {
 class Grid {
     public:
 
-        static constexpr int sizeX = 3; // class var and comiple time constant
-        static constexpr int sizeY = 3; // class var and comiple time constant
+        static constexpr int sizeX = 5; // class var and comiple time constant
+        static constexpr int sizeY = 5; // class var and comiple time constant
 
-        void generateGrid(Node* blockers, int blockerSize); // generate grid with blockers
+        void generateGrid(Node* blockers[], int blockerSize); // generate grid with blockers
 
         Node values[sizeX][sizeY]; // store grid nodes
 
