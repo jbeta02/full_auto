@@ -13,6 +13,7 @@ struct Node {
 class Grid {
     public:
 
+        // DEFINE GRIDE SIZE
         static constexpr int sizeX = 5; // class var and comiple time constant
         static constexpr int sizeY = 5; // class var and comiple time constant
 

@@ -3,13 +3,19 @@
 
 #include "Grid.h"
 
-class PathPlanning {
+class PathPlanning { // TODO: put in include folder
     public:
         int aStar(Node* start, Node* end, Node* nodePath[]); // return size of nodepath
         static Grid grid;
         static constexpr int listSize = grid.sizeX * grid.sizeY;
 
         void print_open_closed();
+
+        Node* const* getOpen() const;
+        Node* const* getClosed() const;
+
+        int getOpenCount();
+        int getClosedCount();
 
     private:
         int pathSize = 0;

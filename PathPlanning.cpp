@@ -131,7 +131,7 @@ void PathPlanning::print_open_closed() {
     cout << "closed \n";
     for (int i=0; i < closedCount; i++) {
         cout << closed[i]->x << ", " << closed[i]->y << "\n";
-        if (closed[i+1] == 0) {
+        if (closed[i+1] == 0) { // break after no longer stream of values
             break;
         }
     }
@@ -140,8 +140,24 @@ void PathPlanning::print_open_closed() {
     for (int i=0; i < openCount; i++) {
         if (open[i] == 0) continue;
         cout << open[i]->x << ", " << open[i]->y << "\n";
-        if (open[i+1] == 0) {
+        if (open[i+1] == 0) { // break after no longer stream of values
             break;
         }
     }
+}
+
+Node* const* PathPlanning::getOpen() const {
+    return open;
+}
+
+Node* const* PathPlanning::getClosed() const {
+    return closed;
+}
+
+int PathPlanning::getOpenCount() {
+    return openCount;
+}
+
+int PathPlanning::getClosedCount() {
+    return closedCount;
 }

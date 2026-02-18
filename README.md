@@ -1,1 +1,1 @@
-Fully autonomous robot capable for path planning and motion profiling. 
+Fully autonomous robot capable of path planning and motion profiling. 
