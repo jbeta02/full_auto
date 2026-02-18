@@ -14,7 +14,7 @@ def plot_graph(var, var_label, df):
 
 
 if __name__ == "__main__":
-    df = pd.read_csv("profile.csv")
+    df = pd.read_csv("test\\profile.csv")
 
     plot_graph("x", "Position", df)
     plot_graph("v", "Velocity", df)

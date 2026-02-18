@@ -7,29 +7,29 @@ import pandas as pd
 # -------------------------------
 # CONFIGURATION
 # -------------------------------
-df = pd.read_csv("planning_grid.csv")
+df = pd.read_csv("test\\planning_grid.csv")
 GRID_X, GRID_Y = df["x"].iloc[0], df["y"].iloc[0]
 
-df = pd.read_csv("planning_start.csv")
+df = pd.read_csv("test\\planning_start.csv")
 start = list(zip(df["x"], df["y"]))
 
-df = pd.read_csv("planning_end.csv")
+df = pd.read_csv("test\\planning_end.csv")
 end = list(zip(df["x"], df["y"]))
 
 # blockers
-df = pd.read_csv("planning_blockers.csv")
+df = pd.read_csv("test\\planning_blockers.csv")
 blockers = list(zip(df["x"], df["y"]))
 
 # A* path
-df = pd.read_csv("planning_path.csv")
+df = pd.read_csv("test\\planning_path.csv")
 path = list(zip(df["x"], df["y"]))
 
 # open
-df = pd.read_csv("planning_open.csv")
+df = pd.read_csv("test\\planning_open.csv")
 open = list(zip(df["x"], df["y"]))
 
 # closed
-df = pd.read_csv("planning_closed.csv")
+df = pd.read_csv("test\\planning_closed.csv")
 closed = list(zip(df["x"], df["y"]))
 
 colorsList = [

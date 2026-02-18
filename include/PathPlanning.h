@@ -3,7 +3,7 @@
 
 #include "Grid.h"
 
-class PathPlanning { // TODO: put in include folder
+class PathPlanning {
     public:
         int aStar(Node* start, Node* end, Node* nodePath[]); // return size of nodepath
         static Grid grid;

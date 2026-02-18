@@ -36,35 +36,35 @@ int main() {
 
     pathPlanning.print_open_closed();
 
-    std::ofstream fileO("planning_open.csv");
+    std::ofstream fileO("test\\planning_open.csv");
     fileO << "i,x,y\n";
     writeData(pathPlanning.getOpen(), pathPlanning.getOpenCount(), &fileO);
 
-    std::ofstream fileC("planning_closed.csv");
+    std::ofstream fileC("test\\planning_closed.csv");
     fileC << "i,x,y\n";
     writeData(pathPlanning.getClosed(), pathPlanning.getClosedCount(), &fileC);
 
-    std::ofstream fileP("planning_path.csv");
+    std::ofstream fileP("test\\planning_path.csv");
     fileP << "i,x,y\n";
     writeData(nodePath, size, &fileP);
 
-    std::ofstream fileB("planning_blockers.csv");
+    std::ofstream fileB("test\\planning_blockers.csv");
     fileB << "i,x,y\n";
     writeData(blockers, blockersSize, &fileB);
 
     Node* s_[] = {start};
-    std::ofstream fileS("planning_start.csv");
+    std::ofstream fileS("test\\planning_start.csv");
     fileS << "i,x,y\n";
     writeData(s_, 1, &fileS);
 
     Node* e_[] = {end};
-    std::ofstream fileE("planning_end.csv");
+    std::ofstream fileE("test\\planning_end.csv");
     fileE << "i,x,y\n";
     writeData(e_, 1, &fileE);
 
     Node gridNode = {0, 0, pathPlanning.grid.sizeX, pathPlanning.grid.sizeY, true, nullptr};
     Node* g_[] = {&gridNode};
-    std::ofstream fileG("planning_grid.csv");
+    std::ofstream fileG("test\\planning_grid.csv");
     fileG << "i,x,y\n";
     writeData(g_, 1, &fileG);
 

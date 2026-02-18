@@ -4,7 +4,7 @@
 
 int main() {
 
-    std::ofstream file("profile.csv");
+    std::ofstream file("test\\profile.csv");
     file << "t,x,v,a\n";
 
     MotionProfile profile(0, 10, 5, 10);
