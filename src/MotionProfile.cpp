@@ -1,5 +1,5 @@
 #include "MotionProfile.h"
-#include "math.h"
+#include <math.h>
 
 MotionProfile::MotionProfile(float startPosition,
     float endPosition, 

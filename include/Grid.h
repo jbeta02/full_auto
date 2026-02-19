@@ -7,7 +7,12 @@ struct Node {
     int x = 0; // grid pos
     int y = 0; // grid pos
     bool isWall = false;
-    Node* parent;
+    Node* parent = nullptr;
+
+    Node() = default;
+
+    Node(int f, int g, int x_, int y_, bool w, Node* p)
+        : g_cost(g), x(x_), y(y_), isWall(w), parent(p) {}
 };
 
 class Grid {

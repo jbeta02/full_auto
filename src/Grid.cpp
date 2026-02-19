@@ -1,11 +1,17 @@
-# include "Grid.h"
-# include <math.h>
+#include "Grid.h"
+
+#ifdef ARDUINO // make abs() usable in Arduino and desktop C++
+  #include <Arduino.h>
+#else
+  #include <math.h>
+#endif
+
 
 void Grid::generateGrid(Node* blockers[], int blockerSize) {
 
     for (int i=0; i < sizeX; i++) {
         for (int j=0; j < sizeY; j++) {
-            Node curr = {0, 0, i, j, false, nullptr}; 
+            Node curr(0, 0, i, j, false, nullptr); 
             values[i][j] = curr;
         }
     }

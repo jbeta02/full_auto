@@ -34,7 +34,7 @@ int main() {
 
     cout << "Path Size: " << size << "\n";
 
-    pathPlanning.print_open_closed();
+    // pathPlanning.print_open_closed();
 
     std::ofstream fileO("test\\planning_open.csv");
     fileO << "i,x,y\n";

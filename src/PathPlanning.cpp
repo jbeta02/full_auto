@@ -1,6 +1,6 @@
 # include "PathPlanning.h"
-#include <iostream>
-using namespace std;
+// #include <iostream>
+// using namespace std;
 
 Grid PathPlanning::grid;
 
@@ -42,6 +42,7 @@ int PathPlanning::aStar(Node* start, Node* end, Node* nodePath[]) {
             }
         }
     }
+    return -1;
 }
 
 
@@ -93,7 +94,7 @@ int PathPlanning::openLowestCost() {
     for (int i=0; i < openCount; i++) {
         if (open[i] == 0) continue;
         int f_cost = open[i]->g_cost + open[i]->h_cost;
-        if (f_cost < lowestFCost || lowestFCost == f_cost && open[i]->h_cost < open[lowestIndex]->h_cost) {
+        if (f_cost < lowestFCost || (lowestFCost == f_cost && open[i]->h_cost < open[lowestIndex]->h_cost)) {
             lowestFCost = f_cost;
             lowestIndex = i;
         }
@@ -127,24 +128,24 @@ void PathPlanning::reversePath(Node* nodePath[], int len) {
     }
 }
 
-void PathPlanning::print_open_closed() {
-    cout << "closed \n";
-    for (int i=0; i < closedCount; i++) {
-        cout << closed[i]->x << ", " << closed[i]->y << "\n";
-        if (closed[i+1] == 0) { // break after no longer stream of values
-            break;
-        }
-    }
+// void PathPlanning::print_open_closed() {
+//     cout << "closed \n";
+//     for (int i=0; i < closedCount; i++) {
+//         cout << closed[i]->x << ", " << closed[i]->y << "\n";
+//         if (closed[i+1] == 0) { // break after no longer stream of values
+//             break;
+//         }
+//     }
 
-    cout << "open \n";
-    for (int i=0; i < openCount; i++) {
-        if (open[i] == 0) continue;
-        cout << open[i]->x << ", " << open[i]->y << "\n";
-        if (open[i+1] == 0) { // break after no longer stream of values
-            break;
-        }
-    }
-}
+//     cout << "open \n";
+//     for (int i=0; i < openCount; i++) {
+//         if (open[i] == 0) continue;
+//         cout << open[i]->x << ", " << open[i]->y << "\n";
+//         if (open[i+1] == 0) { // break after no longer stream of values
+//             break;
+//         }
+//     }
+// }
 
 Node* const* PathPlanning::getOpen() const {
     return open;
