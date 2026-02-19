@@ -29,14 +29,6 @@ class DriveBase {
   void turnRight();
   void turnLeft();
 
-  // move functions at set position (in)
-  void moveForwardIn(float position);
-  void moveBackIn(float position);
-
-  // turning fuctions at set angle (deg)
-  void turnRightDeg(float angle);
-  void turnLeftDeg(float angle);
-
   // generalized motion functions with PID
   // note can be used in a global scope where previous positions are accounted for in the next movement or 
   // user can resent the position/angle every movement to make the command more relative
