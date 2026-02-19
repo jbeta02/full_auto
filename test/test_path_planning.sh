@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# TODO: use CMake
+
 g++ -g -Iinclude test/RunPath.cpp src/PathPlanning.cpp src/Grid.cpp -o build/RunPath.exe
 
 ./build/RunPath
