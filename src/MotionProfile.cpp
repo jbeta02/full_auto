@@ -1,7 +1,7 @@
 #include "MotionProfile.h"
 #include <math.h>
 
-MotionProfile::MotionProfile(float startPosition,
+MotionProfile::MotionProfile(float startPosition, //TODO: DOESN'T WORK ON NEGATIVE!!!!! FIX NOW !!!!!
     float endPosition, 
     float maxVel, 
     float maxAcc)
@@ -14,6 +14,10 @@ MotionProfile::MotionProfile(float startPosition,
     accDist = 0.5 * maxAcc * pow(maxVelTime, 2);
     // minDistance is combo of acceleration and deceleration phase
     distance = endPosition - startPosition;
+    if (distance < 0) {
+        distance = -distance;
+        direction = -1;
+    }
 
     if (distance > accDist * 2) {
         hasCruise = true;
@@ -76,9 +80,9 @@ MotionState MotionProfile::tCurve1D(float time) {
     }
 
     MotionState motionState;
-    motionState.acc = currAcc;
-    motionState.vel = currVel;
-    motionState.pos = startPosition + currPos;
+    motionState.acc = currAcc * direction;
+    motionState.vel = currVel * direction;
+    motionState.pos = (startPosition + currPos) * direction;
     return motionState;
     
 }
