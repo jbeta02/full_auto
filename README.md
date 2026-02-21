@@ -3,7 +3,7 @@
 # Demo
 Demo of fully autonomous robot navigating path found from A*. Robot controlled using motion profiling and PID. 
 
-<video controls src="media/full_run.mp4" title="Full Run Demo"></video>
+[![Full Run Demo](media/side_view.png)](media/full_run.mp4)
 
 # Motion Profiling
 Motion profiling allows for predicable and fluid motion. This robot utilizes a trapezoidal motion profile which
@@ -15,6 +15,7 @@ The velocity and accerlation and capped. The max values where determined through
 <div align="center">
     <img src="media/test_trapezoidal_profile.png" alt="test_trapezoidal_profile" width="100%">
 </div>
+
 
 Below is an example of how the curve looks like when reaching the max velocity is not possible. 
 Intead of producing a trapezoidal curve it becomes a triangle since the cruise phase was not reached. 
