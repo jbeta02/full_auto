@@ -3,7 +3,7 @@
 # Demo
 Demo of fully autonomous robot navigating path found from A*. Robot controlled using motion profiling and PID. 
 
-[![Full Run Demo](media/side_view.png)](media/full_run.mp4)
+[![Full Run Demo](media/side_view.jpg)](media/full_run.mp4)
 
 # Motion Profiling
 Motion profiling allows for predicable and fluid motion. This robot utilizes a trapezoidal motion profile which
