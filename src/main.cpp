@@ -12,8 +12,16 @@ const int MOTOR2_PIN2 = 3;
 const int PWM_PINA = 7; // pwm for motor 1
 const int PWM_PINB = 2; // pwm for motor 2
 
-//
-int globalAngle = 90; // in degrees
+const int TILE_SIZE = 12; // in
+
+// global angle
+//        90
+//        |
+// 180 --------- 0
+//        |
+//        270
+
+int globalAngle = 90; // degrees
 int localAngle = 0;
 
 Node* nodePath[pathPlanning.listSize];
@@ -27,8 +35,7 @@ int getNewGlobalAngle(int xDif, int yDif); // in degrees
 int solveMaze();
 
 void setup() {
-  // put your setup code here, to run once:
-  Serial.begin(9600);
+  // Serial.begin(9600);
   drive.init(MOTOR1_PIN1, MOTOR1_PIN2, MOTOR2_PIN1, MOTOR2_PIN2, PWM_PINA, PWM_PINB);
 
   pathSize = solveMaze();
@@ -39,16 +46,53 @@ void setup() {
 void loop() {
   Node* currentNode = nodePath[currentPathIndex];
 
-  Serial.print("local A, ");
-  Serial.print(localAngle);
-  Serial.print(" global A, ");
-  Serial.print(globalAngle);
-  Serial.print(" state ");
-  Serial.println(state);
+  // Serial.print("loc A ");
+  // Serial.print(localAngle);
+  // Serial.print("targ Ang ");
+  // Serial.print(drive.getTargetAngle());
+  // Serial.print(" global A, ");
+  // Serial.print(globalAngle);
+  // Serial.print(" curr Ang ");
+  // Serial.print(drive.getCurrentRobotAngle());
+  // Serial.print(" curr Pos ");
+  // Serial.print(drive.getCurrentWheelPosition());
+  // Serial.print(" atTargAng ");
+  // Serial.print(drive.atTargetAngle());
+  // Serial.print(" atTargPos ");
+  // Serial.print(drive.atTargetAngle());
+  // Serial.print(" state ");
+  // Serial.print(state);
+  // Serial.print(" error ");
+  // Serial.print(drive.out3);
+  // Serial.print(" FB, ");
+  // Serial.print(drive.out);
+  // Serial.print(" targetVel ");
+  // Serial.print(drive.targetVel);
+  // Serial.print(" FF ");
+  // Serial.print(drive.out2);
+  // Serial.print(" currVel ");
+  // Serial.print(drive.out4);
+  // Serial.print(" angle vel ");
+  // Serial.print(drive.getTurnVel());
+  // Serial.print(" angle acc ");
+  // Serial.println(drive.getTurnAcc());
+  // Serial.println();
 
-  drive.move(12);
+  switch (state) { // determine turn angle, perform turn, determine move, perform move
+    // case -2:
+    //   drive.turn(-90);
+    //   state--;
+    //   break;
 
-  switch (state) {
+    // case -3:
+    //   drive.updateTurn();
+    //   if (drive.atTargetAngle()) {
+    //     drive.resetEncoder();
+    //     drive.resetGyro();
+    //     state--;
+    //   }
+    //   break;
+
     case 0:
       if (currentPathIndex + 1 < pathSize) {
         int xDif = nodePath[currentPathIndex + 1]->x - currentNode->x;
@@ -67,6 +111,15 @@ void loop() {
 
     case 1:
       drive.turn(localAngle);
+      state++;
+
+    case 2:
+      if (globalAngle == localAngle) {
+        state++;
+        break;
+      }
+
+      drive.updateTurn();
 
       if (drive.atTargetAngle()) {
         drive.resetEncoder();
@@ -75,18 +128,18 @@ void loop() {
       }
       break;
 
-    case 2:
-      state++;
-      break;
-    
     case 3:
-      drive.move(12);
+      drive.move(TILE_SIZE);
+      state++;
+    
+    case 4:
+      drive.updateMove();
 
       if (drive.atTargetPosition()) {
         drive.resetEncoder();
         currentPathIndex++;
         state = 0;
-        if (currentPathIndex-1 == pathSize) {
+        if (currentPathIndex >= pathSize - 1) {
           state = -1;
         }
       }

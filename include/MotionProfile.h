@@ -13,6 +13,8 @@ class MotionProfile {
 
         MotionState tCurve1D(float time); // return pointer instead of vector to use with arduino
 
+        bool atPosition();
+
         float totalTime;
 
     private:

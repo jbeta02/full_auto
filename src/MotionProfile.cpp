@@ -84,5 +84,9 @@ MotionState MotionProfile::tCurve1D(float time) {
     motionState.vel = currVel * direction;
     motionState.pos = (startPosition + currPos) * direction;
     return motionState;
-    
+}
+
+
+bool MotionProfile::atPosition() {
+    return currPos == distance;
 }
