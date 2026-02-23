@@ -50,7 +50,7 @@ is then sent to the drive in pieces so that it may peform the needed actions to 
 
 The motion profile will produce the desired position, velocity, and acceleration at each time interval given 
 the start and end position, max velocity, and max acceleration. The motion profile output can act as a feedforward
-control command. It was do the heavy lifting while PID will correct for any difference between the desired and actual
+control command. It will do the heavy lifting while PID will correct for any difference between the desired and actual
 values and will act as a feedback command. 
 
 The sum of feedforward and feedback will produce a command that is given to the motors managed by the the drive. The drive
